@@ -1,0 +1,83 @@
+{
+  "results": {
+    "mt_bench_discriminate_gpt3.5": {
+      "exact_match,remove_whitespace": 0.56875,
+      "exact_match_stderr,remove_whitespace": 0.03927594984018917,
+      "alias": "mt_bench_discriminate_gpt3.5"
+    }
+  },
+  "configs": {
+    "mt_bench_discriminate_gpt3.5": {
+      "task": "mt_bench_discriminate_gpt3.5",
+      "dataset_path": "json",
+      "dataset_kwargs": {
+        "data_files": {
+          "validation": "/bask/projects/j/jlxi8926-auto-sum/dongwei/FastChat/fastchat/llm_judge/mt_bench_gpt3.5_evaluative.jsonl"
+        }
+      },
+      "validation_split": "validation",
+      "process_docs": "<function process_docs at 0x7f51f21f8160>",
+      "doc_to_text": "<s>[INST]<<SYS>>You will be given two LLM responses to a question. Please choose one answer from those answers that you think is the best answer to the question. Your final selection should be 1 or 2, where 1 represents the answer you choose is answer 1, 2 represents the answer you choose is answer 2. Please end your generation with 1 or 2<</SYS>>\nHere are the two lists of answer choices.\nAnswer1: {{answer1}}\nAnswer2: {{answer2}}\nAnswer:[/INST]",
+      "doc_to_target": "{{choice}}",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "num_fewshot": 5,
+      "metric_list": [
+        {
+          "metric": "exact_match",
+          "aggregation": "mean",
+          "higher_is_better": true,
+          "ignore_case": true,
+          "ignore_punctuation": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "until": [
+          "\n",
+          ".",
+          ","
+        ],
+        "do_sample": false,
+        "temperature": 0.0
+      },
+      "repeats": 1,
+      "filter_list": [
+        {
+          "name": "remove_whitespace",
+          "filter": [
+            {
+              "function": "remove_whitespace"
+            },
+            {
+              "function": "take_first"
+            }
+          ]
+        }
+      ],
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 3.0
+      }
+    }
+  },
+  "versions": {
+    "mt_bench_discriminate_gpt3.5": 3.0
+  },
+  "n-shot": {
+    "mt_bench_discriminate_gpt3.5": 5
+  },
+  "config": {
+    "model": "openai-chat-completions",
+    "model_args": "model=gpt-3.5-turbo-0125",
+    "batch_size": 1,
+    "batch_sizes": [],
+    "device": null,
+    "use_cache": null,
+    "limit": null,
+    "bootstrap_iters": 100000,
+    "gen_kwargs": null
+  },
+  "git_hash": "90c92fe"
+}

@@ -1,0 +1,64 @@
+{
+  "results": {
+    "wmt-ro-en-t5-prompt": {
+      "bleu,none": 0.0014269540729539205,
+      "bleu_stderr,none": "N/A",
+      "alias": "wmt-ro-en-t5-prompt"
+    }
+  },
+  "configs": {
+    "wmt-ro-en-t5-prompt": {
+      "task": "wmt-ro-en-t5-prompt",
+      "group": [
+        "wmt-t5-prompt"
+      ],
+      "dataset_path": "wmt16",
+      "dataset_name": "ro-en",
+      "training_split": "train",
+      "validation_split": "validation",
+      "doc_to_text": "translate English to Romanian: {{translation.en}}",
+      "doc_to_target": "{{translation.ro}}",
+      "description": "",
+      "target_delimiter": " ",
+      "fewshot_delimiter": "\n\n",
+      "metric_list": [
+        {
+          "metric": "<function bleu at 0x7fd8d8b1edd0>",
+          "aggregation": "<function agg_bleu at 0x7fd8a6cfc700>",
+          "higher_is_better": true
+        }
+      ],
+      "output_type": "generate_until",
+      "generation_kwargs": {
+        "do_sample": true,
+        "temperature": 0.7,
+        "until": [
+          "\n\n"
+        ]
+      },
+      "repeats": 4,
+      "should_decontaminate": false,
+      "metadata": {
+        "version": 1.0
+      }
+    }
+  },
+  "versions": {
+    "wmt-ro-en-t5-prompt": 1.0
+  },
+  "n-shot": {
+    "wmt-ro-en-t5-prompt": 0
+  },
+  "config": {
+    "model": "vllm",
+    "model_args": "pretrained=mistralai/Mixtral-8x7B-Instruct-v0.1,tensor_parallel_size=2,dtype=auto",
+    "batch_size": "auto",
+    "batch_sizes": [],
+    "device": null,
+    "use_cache": null,
+    "limit": null,
+    "bootstrap_iters": 100000,
+    "gen_kwargs": null
+  },
+  "git_hash": "97a67d27"
+}

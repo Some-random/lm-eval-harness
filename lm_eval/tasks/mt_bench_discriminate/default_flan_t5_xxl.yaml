@@ -1,0 +1,33 @@
+task: mt_bench_discriminate_flan_t5_xxl
+dataset_path: json
+dataset_name: null
+validation_split: validation
+dataset_kwargs:
+  data_files:
+    validation: "/bask/projects/j/jlxi8926-auto-sum/dongwei/FastChat/fastchat/llm_judge/mt_bench_flan_t5_xxl_evaluative.jsonl"
+output_type: generate_until
+process_docs: !function utils.process_docs
+doc_to_text: "You will be given two LLM responses to a question. Please choose one answer from those answers that you think is the best answer to the question. Your final selection should be 1 or 2, where 1 represents the answer you choose is answer 1, 2 represents the answer you choose is answer 2. Please end your generation with 1 or 2\nHere are the two lists of answer choices.\nAnswer1: {{answer1}}\nAnswer2: {{answer2}}\nAnswer:"
+doc_to_target: "{{choice}}"
+generation_kwargs:
+  until:
+    - "\n"
+    - "."
+    - ","
+  do_sample: false
+  temperature: 0.0
+num_fewshot: 5
+filter_list:
+  - name: remove_whitespace
+    filter:
+      - function: remove_whitespace
+      - function: take_first
+target_delimiter: " "
+metric_list:
+  - metric: exact_match
+    aggregation: mean
+    higher_is_better: true
+    ignore_case: true
+    ignore_punctuation: true
+metadata:
+  version: 3.0

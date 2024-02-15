@@ -1,0 +1,25 @@
+group:
+  - multiple_choice
+task: hellaswag_discriminate
+dataset_path: hellaswag
+dataset_name: null
+# dataset_kwargs: 
+#   data_files:
+#   validation:"/bask/projects/j/jlxi8926-auto-sum/dongwei/lm-evaluation-harness/meta_llama/Llama-2-7b-chat-hf_hellaswag/pretrained__meta-llama__Llama-2-7b-chat-hf_hellaswag.jsonl"
+output_type: multiple_choice
+training_split: train
+validation_split: validation
+test_split: null
+process_docs: !function utils.process_docs
+doc_to_text: "Given this partial sentence: {{query}} \nHere are the two continuations to complete it.\n0: {{answer1}}\n1: {{answer2}}\n Please choose the one that is better."
+doc_to_target: "{{gold}}"
+doc_to_choice: "choices"
+metric_list:
+  - metric: acc
+    aggregation: mean
+    higher_is_better: true
+  - metric: acc_norm
+    aggregation: mean
+    higher_is_better: true
+metadata:
+  version: 1.0

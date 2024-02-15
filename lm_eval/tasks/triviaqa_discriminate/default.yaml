@@ -1,0 +1,33 @@
+task: triviaqa_discriminate
+dataset_path: trivia_qa
+dataset_name: rc.nocontext
+output_type: generate_until
+training_split: train
+validation_split: validation
+process_docs: !function utils.process_docs
+# doc_to_text: "<s>[INST]<<SYS>>You will be given two lists of answers to a question. Please choose one answer from those two lists that you think is the best answer to the question. Please end your generation with the exact words in the answer you selected<</SYS>>\nQuestion: Who had a 70s No 1 hit with Kiss You All Over?\nHere are the two lists of answer choices.\nAnswer1: ['L.P. HARTLEY', 'L P Hartley', 'L. P. Hartley', 'Leslie Hartley', 'L.P. Hartley', 'The past is a foreign country', 'Leslie Poles Hartley', 'LP Hartley']\nAnswer2: ['Internal exile', 'Exiles', 'Transported for life', 'Exile (politics and government)', 'Voluntary exile', 'Sent into exile', 'Exile and Banishment', 'Self-exile', 'Forced exile', 'Exile', 'Exile in Greek tragedy', 'Banish', 'Banishment']\nAnswer:[/INST]Sent into exile\n[INST]Question: What was the last US state to reintroduce alcohol after prohibition?\nHere are the two lists of answer choices.\nAnswer1: ['Utah (State)', 'Forty-Fifth State', 'Sports in Utah', 'Climate of Utah', 'Education in Utah', 'UT (state)', 'Utahn', 'Yutas', 'Geography of Utah', 'Utah', 'Utah, United States', 'Utah state nickname', 'History of mining in Utah', 'State of Utah', 'Religion in Utah', 'Utah (U.S. state)', 'Transportation in Utah', 'Beehive State', 'US-UT', 'Utah (state)', 'Forty-fifth State', 'Utahan', 'Politics of Utah', 'Salt Lake Seagulls', '45th State', 'History of Utah (to 1847)', 'The Beehive State', 'Youtah', 'Transport in Utah']\nAnswer2:['Haiwii', 'The State of Hawaii', 'Moku<ca><bb><c4><81>ina o Hawai<ca><bb>i', 'Moku<ca><bb>a-ina o Hawai<ca><bb>i', 'Demographics of Hawaii', 'Hawaiian culture', \"Hawai'i Resident\", 'Economy of Hawaii', 'Hawaii, United States', 'Haiwaii', 'US-HI', 'Owhyhee', 'Transport in Hawaii', 'Hawii', 'Hawaii, USA', '50th State', 'Hawai<e2><80><99>i', \"Hawai'i\", 'Haway', 'Hawai%60i', 'Hawaii (U.S. state)', 'State of Hawai<ca><bb>i', 'Haw<c3><a1>i', 'Languages of Hawaii', 'Hawa<c3><af>', 'Demographics of Hawai<ca><bb>i', 'State of Hawai%60i', 'Hawwaii', 'Hawai<e2><80><98>i', 'Moku%60aina o Hawai%60i', 'U.S. (HI)', 'Hawai<c3><ad>', 'The Aloha State', 'Hawaii', 'Culture of Hawaii', 'Geography of Hawaii', \"Hawai'i State\", 'State of Hawaii', 'Health in Hawaii', 'Religion in Hawaii', '<e3><83><8f><e3><83><af><e3><82><a4>', 'Hawai<ca><bb>i', 'Hawaii Resident', 'Moku%60a-ina o Hawai%60i', 'Howaii', 'Fiftieth State', 'Hawaii (state)', 'Aloha State', 'Education in Hawaii', \"State of Hawai'i\"]\nAnswer:[/INST]Utah\n[INST]Question: {{question}}?\nHere are the two lists of answer choices.\nAnswer1: {{answer1}}\nAnswer2: {{answer2}}\nAnswer:[/INST]"
+doc_to_text: "<s>[INST]<<SYS>>You will be given two lists of answers to a question. Please choose one answer from those two lists that you think is the best answer to the question. Your final selection should be 1 or 2, where 1 represents the answer you choose is from list 1, 2 represents the answer you choose is from list 2. Please end your generation with 1 or 2<</SYS>>\nQuestion: Who had a 70s No 1 hit with Kiss You All Over?\nHere are the two lists of answer choices.\nAnswer1: ['L.P. HARTLEY', 'L P Hartley', 'L. P. Hartley', 'Leslie Hartley', 'L.P. Hartley', 'The past is a foreign country', 'Leslie Poles Hartley', 'LP Hartley']\nAnswer2: ['Internal exile', 'Exiles', 'Transported for life', 'Exile (politics and government)', 'Voluntary exile', 'Sent into exile', 'Exile and Banishment', 'Self-exile', 'Forced exile', 'Exile', 'Exile in Greek tragedy', 'Banish', 'Banishment']\nAnswer:[/INST]2\n[INST]Question: What was the last US state to reintroduce alcohol after prohibition?\nHere are the two lists of answer choices.\nAnswer1: ['Utah (State)', 'Forty-Fifth State', 'Sports in Utah', 'Climate of Utah', 'Education in Utah', 'UT (state)', 'Utahn', 'Yutas', 'Geography of Utah', 'Utah', 'Utah, United States', 'Utah state nickname', 'History of mining in Utah', 'State of Utah', 'Religion in Utah', 'Utah (U.S. state)', 'Transportation in Utah', 'Beehive State', 'US-UT', 'Utah (state)', 'Forty-fifth State', 'Utahan', 'Politics of Utah', 'Salt Lake Seagulls', '45th State', 'History of Utah (to 1847)', 'The Beehive State', 'Youtah', 'Transport in Utah']\nAnswer2:['Haiwii', 'The State of Hawaii', 'Moku<ca><bb><c4><81>ina o Hawai<ca><bb>i', 'Moku<ca><bb>a-ina o Hawai<ca><bb>i', 'Demographics of Hawaii', 'Hawaiian culture', \"Hawai'i Resident\", 'Economy of Hawaii', 'Hawaii, United States', 'Haiwaii', 'US-HI', 'Owhyhee', 'Transport in Hawaii', 'Hawii', 'Hawaii, USA', '50th State', 'Hawai<e2><80><99>i', \"Hawai'i\", 'Haway', 'Hawai%60i', 'Hawaii (U.S. state)', 'State of Hawai<ca><bb>i', 'Haw<c3><a1>i', 'Languages of Hawaii', 'Hawa<c3><af>', 'Demographics of Hawai<ca><bb>i', 'State of Hawai%60i', 'Hawwaii', 'Hawai<e2><80><98>i', 'Moku%60aina o Hawai%60i', 'U.S. (HI)', 'Hawai<c3><ad>', 'The Aloha State', 'Hawaii', 'Culture of Hawaii', 'Geography of Hawaii', \"Hawai'i State\", 'State of Hawaii', 'Health in Hawaii', 'Religion in Hawaii', '<e3><83><8f><e3><83><af><e3><82><a4>', 'Hawai<ca><bb>i', 'Hawaii Resident', 'Moku%60a-ina o Hawai%60i', 'Howaii', 'Fiftieth State', 'Hawaii (state)', 'Aloha State', 'Education in Hawaii', \"State of Hawai'i\"]\nAnswer:[/INST]1\n[INST]Question: {{question}}?\nHere are the two lists of answer choices.\nAnswer1: {{answer1}}\nAnswer2: {{answer2}}\nAnswer:[/INST]"
+doc_to_target: "{{answer.aliases}}"
+should_decontaminate: true
+doc_to_decontamination_query: question
+generation_kwargs:
+  until:
+    - "\n"
+    - "."
+    - ","
+  do_sample: false
+  temperature: 0.0
+filter_list:
+  - name: remove_whitespace
+    filter:
+      - function: remove_whitespace
+      - function: take_first
+target_delimiter: " "
+metric_list:
+  - metric: exact_match
+    aggregation: mean
+    higher_is_better: true
+    ignore_case: true
+    ignore_punctuation: true
+metadata:
+  version: 3.0

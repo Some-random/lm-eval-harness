@@ -1,0 +1,32 @@
+task: triviaqa_discriminate_13b_gt_and_random
+dataset_path: trivia_qa
+dataset_name: rc.nocontext
+output_type: generate_until
+training_split: train
+validation_split: validation
+process_docs: !function utils.process_docs_13b_gt_and_random
+doc_to_text: "<s>[INST]<<SYS>>You will be given two choices of answers to a question. Please choose the answer that you think is the best answer to the question. Your final selection should be 1 or 2, where 1 represents the answer you choose is answer 1, 2 represents the answer you choose is answer 2. Please end your generation with 1 or 2<</SYS>>\nQuestion: Who had a 70s No 1 hit with Kiss You All Over?\nHere are the two lists of answer choices.\nAnswer1: L P Hartley\nAnswer2: Sent into exile\nAnswer:[/INST]2\n[INST]Question: What was the last US state to reintroduce alcohol after prohibition?\nHere are the two lists of answer choices.\nAnswer1: Utah (State)\nAnswer2: Haiwii\nAnswer:[/INST]1\n[INST]Question: {{question}}?\nHere are the two lists of answer choices.\nAnswer1: {{answer1}}\nAnswer2: {{answer2}}\nAnswer:[/INST]"
+doc_to_target: "{{answer.aliases}}"
+should_decontaminate: true
+doc_to_decontamination_query: question
+generation_kwargs:
+  until:
+    - "\n"
+    - "."
+    - ","
+  do_sample: false
+  temperature: 0.0
+filter_list:
+  - name: remove_whitespace
+    filter:
+      - function: remove_whitespace
+      - function: take_first
+target_delimiter: " "
+metric_list:
+  - metric: exact_match
+    aggregation: mean
+    higher_is_better: true
+    ignore_case: true
+    ignore_punctuation: true
+metadata:
+  version: 3.0
